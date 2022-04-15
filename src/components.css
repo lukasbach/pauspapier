@@ -92,24 +92,32 @@
 .start-page-button:active {
   background-color: var(--dark-active);
 }
-.start-page-close-button {
+
+.start-page-floating-buttons {
   position: absolute;
   top: 10px;
   right: 10px;
+  display: flex;
+}
+.start-page-floating-button {
+  height: 24px;
   background-color: var(--dark);
   color: white;
   border-radius: 99px;
   border: none;
-  font-size: 1rem;
-  width: 24px;
-  height: 24px;
-  display: flex;
+  font-size: .7rem;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
+  margin-left: 6px;
 }
-.start-page-close-button:hover {
+.start-page-floating-button-close {
+  width: 24px;
+  font-size: 1rem;
+}
+.start-page-floating-button:hover {
   background-color: var(--dark-hover);
 }
-.start-page-close-button:active {
+.start-page-floating-button:active {
   background-color: var(--dark-active);
 }
