@@ -25,6 +25,9 @@
 .in-area-controls {
   background-color: var(--primary);
   border-top: 3px solid var(--dark);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: right;
