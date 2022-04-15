@@ -97,4 +97,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.prepare.outputs.upload_url }}
-          targets: src-tauri/target/release/bundle/*/*
+          targets: src-tauri/target/release/bundle/*/*.dmg
