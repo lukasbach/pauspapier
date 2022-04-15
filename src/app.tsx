@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StartPage } from "./start-page";
 import { AreaSelect } from "./area-select";
 import { AppState, Area } from "./common";
+import { InArea } from "./in-area";
 
 const fs = (window as any).__TAURI__.fs;
 
@@ -31,7 +32,8 @@ function App() {
         />
       );
     case AppState.InArea:
-      break;
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      return <InArea area={area!} screenshotPath={screenshotPath} />;
   }
 }
 

@@ -52,7 +52,11 @@
     "allowlist": {
       "all": true,
       "fs": {
-        "scope": ["C:\\dev\\tauri-app\\src-tauri\\*"]
+        "scope": ["$TEMP/**"]
+      },
+      "protocol": {
+        "asset": true,
+        "assetScope": ["**"]
       }
     },
     "windows": [
@@ -65,7 +69,7 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; img-src 'self' asset: https://asset.localhost; media-src 'self' asset: https://asset.localhost"
     }
   }
 }

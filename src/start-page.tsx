@@ -11,14 +11,15 @@ export const StartPage: React.FC<{
       <button
         type="button"
         onClick={async () => {
+          const appWindow = await getCurrent();
+          await appWindow.hide();
+          await new Promise(r => setTimeout(r, 200)); // wait for hide animation
           const monitor = await currentMonitor();
           const path = await invoke<string>("make_screenshot", {
             ...monitor?.position,
             dir: await tempdir(),
           });
-          const appWindow = await getCurrent();
-          await appWindow.setAlwaysOnTop(true);
-          await appWindow.setFullscreen(true);
+          await appWindow.show();
           props.onStart(path);
         }}
       >
