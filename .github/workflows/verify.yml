@@ -1,0 +1,14 @@
+name: Verify
+on:
+  push:
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build and Lint
+        run: |
+          yarn
+          yarn build
+          yarn lint
