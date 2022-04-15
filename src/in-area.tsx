@@ -18,6 +18,8 @@ import {
   IoArrowForwardCircleSharp,
   IoArrowBackCircleSharp,
   IoArrowDownCircleSharp,
+  IoStarOutline,
+  IoStarSharp,
 } from "react-icons/io5";
 import { ControlButton } from "./control-button";
 
@@ -30,6 +32,7 @@ export const InArea: React.FC<{
   onClose: () => void;
 }> = ({ area, screenshotPath, onClose }) => {
   const [hidden, setHidden] = useState(false);
+  const [onTop, setOnTop] = useState(true);
   const [nudgeControls, setNudgeControls] = useState(false);
   const [hoverText, setHoverText] = useState<string>();
   const [opacity, setOpacity] = useState(0.8);
@@ -39,11 +42,19 @@ export const InArea: React.FC<{
       const appWindow = await getCurrent();
       await appWindow.setResizable(false);
       await appWindow.setDecorations(false);
-      await appWindow.setSize(new LogicalSize(area.w, area.h + headerHeight));
+      await appWindow.setAlwaysOnTop(true);
+      await appWindow.setSize(
+        new LogicalSize(
+          Math.max(200, area.w),
+          Math.max(area.h + headerHeight, 40)
+        )
+      );
+      await appWindow.setMinSize(new LogicalSize(200, 40));
     })();
     return () => {
       (async () => {
         const appWindow = await getCurrent();
+        await appWindow.setAlwaysOnTop(false);
       })();
     };
   }, []);
@@ -115,11 +126,23 @@ export const InArea: React.FC<{
                 const appWindow = await getCurrent();
                 await appWindow.setSize(
                   new LogicalSize(
-                    area.w,
-                    !hidden ? headerHeight : area.h + headerHeight
+                    Math.max(area.w, 200),
+                    Math.max(!hidden ? headerHeight : area.h + headerHeight, 40)
                   )
                 );
                 setHidden(!hidden);
+              }}
+            />
+            <ControlButton
+              icon={onTop ? <IoStarSharp /> : <IoStarOutline />}
+              description={
+                onTop ? "Disable always on top" : "Enable Always on top"
+              }
+              onSetHoverText={setHoverText}
+              onClick={async () => {
+                const appWindow = await getCurrent();
+                await appWindow.setAlwaysOnTop(!onTop);
+                setOnTop(!onTop);
               }}
             />
             <ControlButton

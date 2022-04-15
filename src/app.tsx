@@ -39,6 +39,8 @@ function App() {
           screenshotPath={screenshotPath}
           onClose={() => {
             setAppState(AppState.StartPage);
+            setScreenshotPath("");
+            setArea(undefined);
           }}
         />
       );

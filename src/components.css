@@ -82,11 +82,31 @@
   font-size: 1rem;
   font-weight: bold;
   padding: 10px 30px;
-  cursor: pointer;
 }
 .start-page-button:hover {
   background-color: var(--dark-hover);
 }
 .start-page-button:active {
+  background-color: var(--dark-active);
+}
+.start-page-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--dark);
+  color: white;
+  border-radius: 99px;
+  border: none;
+  font-size: 1rem;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.start-page-close-button:hover {
+  background-color: var(--dark-hover);
+}
+.start-page-close-button:active {
   background-color: var(--dark-active);
 }
