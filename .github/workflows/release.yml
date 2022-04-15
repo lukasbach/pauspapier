@@ -55,6 +55,7 @@ jobs:
             libappindicator3-dev \
             librsvg2-dev
           yarn
+          yarn syncv
           yarn tauri build
       - name: Upload Release Assets
         uses: NBTX/upload-release-assets@v1
@@ -62,7 +63,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.prepare.outputs.upload_url }}
-          targets: src-tauri/target/release/bundle/*/*
+          targets: src-tauri/target/release/bundle/*/*.deb
 
   build_windows:
     runs-on: windows-latest
@@ -72,6 +73,7 @@ jobs:
       - name: Build
         run: |
           yarn
+          yarn syncv
           yarn tauri build
           Move-Item -Path .\src-tauri\target\release\pauspapier.exe -Destination .\src-tauri\target\release\bundle\msi\
       - name: Upload Release Assets
@@ -90,6 +92,7 @@ jobs:
       - name: Build
         run: |
           yarn
+          yarn syncv
           yarn tauri build
       - name: Upload Release Assets
         uses: NBTX/upload-release-assets@v1
