@@ -24,10 +24,13 @@
 
 .in-area-controls {
   background-color: var(--primary);
+  border-top: 3px solid var(--dark);
   display: flex;
   align-items: center;
   justify-content: right;
   padding: 0 4px;
+  float: right;
+  min-width: 230px;
 }
 
 .control-button {

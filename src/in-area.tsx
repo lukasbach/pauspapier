@@ -80,6 +80,7 @@ export const InArea: React.FC<{
         className="in-area-controls"
         data-tauri-drag-region={true}
         style={{
+          width: `${area.w}px`,
           height: `${headerHeight}px`,
         }}
       >
