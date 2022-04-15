@@ -23,6 +23,8 @@ jobs:
       #     major-wording: MAJOR,cut-major
       #     patch-wording: patch,fixes
       #     rc-wording: RELEASE,alpha
+      - name: Sync Version
+        run: yarn syncv
       # - name: Create Release
       #   id: createrelease
       #   uses: actions/create-release@v1
@@ -41,7 +43,15 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build
         run: |
-          sudo apt-get install libgtk-3-dev
+          # https://tauri.studio/docs/getting-started/setting-up-linux#1-system-dependencies
+          sudo apt update && sudo apt install libwebkit2gtk-4.0-dev \
+            build-essential \
+            curl \
+            wget \
+            libssl-dev \
+            libgtk-3-dev \
+            libappindicator3-dev \
+            librsvg2-dev
           yarn
           yarn tauri build
           ls ./src-tauri/target/release/
