@@ -1,4 +1,4 @@
-name: Deployment
+name: Release
 on:
   workflow_dispatch:
 
@@ -25,16 +25,16 @@ jobs:
           rc-wording: RELEASE,alpha
       - name: Sync Version
         run: yarn syncv
-     - name: Create Release
-       id: createrelease
-       uses: actions/create-release@v1
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       with:
-         tag_name: ${{ steps.versionbump.newTag }}
-         release_name: Release ${{ steps.versionbump.newTag }}
-         draft: false
-         prerelease: false
+      - name: Create Release
+        id: createrelease
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.versionbump.newTag }}
+          release_name: Release ${{ steps.versionbump.newTag }}
+          draft: false
+          prerelease: false
 
   build_ubuntu:
     runs-on: ubuntu-latest
