@@ -1,0 +1,67 @@
+name: Deployment
+on:
+  workflow_dispatch:
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build and Lint
+        run: |
+          yarn
+          yarn build
+          yarn lint
+      # - name: Version Bump
+      #   uses: phips28/gh-action-bump-version@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     default: patch
+      #     minor-wording: add,Adds,new
+      #     major-wording: MAJOR,cut-major
+      #     patch-wording: patch,fixes
+      #     rc-wording: RELEASE,alpha
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: ${{ github.ref }}
+      #     release_name: Release ${{ github.ref }}
+      #     draft: false
+      #     prerelease: false
+
+  build_ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          yarn
+          yarn tauri build
+          ls ./src-tauri/target/release/
+          ls ./src-tauri/target/release/build/
+
+  build_windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          yarn
+          yarn tauri build
+          ls ./src-tauri/target/release/
+          ls ./src-tauri/target/release/build/
+
+  build_macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          yarn
+          yarn tauri build
+          ls ./src-tauri/target/release/
+          ls ./src-tauri/target/release/build/
