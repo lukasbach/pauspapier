@@ -8,6 +8,7 @@
 fn make_screenshot(x: i32, y: i32, dir: String) -> String {
   use screenshots::Capturer;
   use std::{fs::File, io::Write, time::Instant};
+  use chrono::prelude::*;
 
   println!("Starting screenshot");
   let start = Instant::now();
@@ -19,7 +20,7 @@ fn make_screenshot(x: i32, y: i32, dir: String) -> String {
       let image = capturer.capture_screen().unwrap();
       let buffer = image.png();
       let display_id = capturer.display_info.id.to_string();
-      let path = dir + &display_id + ".png";
+      let path = dir + &display_id + "_" + &Utc::now().timestamp().to_string() + ".png";
       let pathclone = path.clone();
       let mut file = File::create(path).unwrap();
       file.write_all(&buffer[..]).unwrap();
