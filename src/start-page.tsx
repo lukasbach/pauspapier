@@ -1,15 +1,40 @@
-import React from "react";
-import { currentMonitor, getCurrent } from "@tauri-apps/api/window";
+import React, { useEffect } from "react";
+import {
+  currentMonitor,
+  getCurrent,
+  LogicalSize,
+  PhysicalSize,
+} from "@tauri-apps/api/window";
 import { invoke } from "@tauri-apps/api/tauri";
 import { tempdir } from "@tauri-apps/api/os";
 
 export const StartPage: React.FC<{
   onStart: (path: string) => void;
 }> = props => {
+  useEffect(() => {
+    (async () => {
+      const appWindow = await getCurrent();
+      await appWindow.setResizable(false);
+      await appWindow.setDecorations(false);
+      await appWindow.setSize(new PhysicalSize(450, 120));
+    })();
+    return () => {
+      (async () => {
+        const appWindow = await getCurrent();
+      })();
+    };
+  }, []);
+
   return (
-    <div>
+    <div className="start-page" data-tauri-drag-region={true}>
+      <h1 className="start-page-header" data-tauri-drag-region={true}>
+        Pauspapier
+      </h1>
+      <p className="start-page-text" data-tauri-drag-region={true}>
+        Select an area to overlay on your screen.
+      </p>
       <button
-        type="button"
+        className="start-page-button"
         onClick={async () => {
           const appWindow = await getCurrent();
           await appWindow.hide();
@@ -23,7 +48,7 @@ export const StartPage: React.FC<{
           props.onStart(path);
         }}
       >
-        Select Area
+        Select an Area
       </button>
     </div>
   );

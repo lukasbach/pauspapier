@@ -33,7 +33,15 @@ function App() {
       );
     case AppState.InArea:
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      return <InArea area={area!} screenshotPath={screenshotPath} />;
+      return (
+        <InArea
+          area={area!}
+          screenshotPath={screenshotPath}
+          onClose={() => {
+            setAppState(AppState.StartPage);
+          }}
+        />
+      );
   }
 }
 

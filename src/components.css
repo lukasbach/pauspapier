@@ -3,9 +3,90 @@
   height: 100%;
   overflow: hidden;
   cursor: crosshair;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 3rem;
+  font-weight: bolder;
 }
 
 .dragging-area {
   position: absolute;
   border: 1px solid var(--primary);
+}
+
+.in-area-image {
+  float: right;
+  z-index: 1;
+}
+
+.in-area-controls {
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding: 0 4px;
+}
+
+.control-button {
+  background-color: #283428;
+  border: none;
+  border-radius: 4px;
+  margin-right: 4px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.control-button:hover {
+  background-color: #354235;
+}
+
+.hover-text {
+  position: absolute;
+  right: 5px;
+  top: 35px;
+  background-color: var(--primary);
+  border-radius: 4px;
+  padding: 2px 8px;
+  z-index: 100;
+}
+
+
+.start-page {
+  background-color: var(--primary);
+  padding: 10px 20px;
+  color: var(--dark);
+  border-top: 6px solid var(--dark);
+}
+.start-page-header {
+  font-size: 2rem;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: normal;
+  letter-spacing: 3px;
+}
+.start-page-text {
+
+}
+.start-page-button {
+  background-color: var(--dark);
+  color: white;
+  border-radius: 4px;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 30px;
+  cursor: pointer;
+}
+.start-page-button:hover {
+  background-color: var(--dark-hover);
+}
+.start-page-button:active {
+  background-color: var(--dark-active);
 }

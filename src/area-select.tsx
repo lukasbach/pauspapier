@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { getCurrent } from "@tauri-apps/api/window";
 import { convertFileSrc } from "@tauri-apps/api/tauri";
 
-const minTime = 1000;
+const minTime = 500;
 
 export const AreaSelect: React.FC<{
   screenshotPath: string;
@@ -46,7 +46,7 @@ export const AreaSelect: React.FC<{
     <div
       className="area-select-container"
       style={{
-        backgroundImage: `url(${encodeURI(
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${encodeURI(
           convertFileSrc(props.screenshotPath)
         )})`,
       }}
@@ -70,6 +70,7 @@ export const AreaSelect: React.FC<{
         }
       }}
     >
+      Click and drag to select area
       <div
         className="dragging-area"
         ref={areaRef}
@@ -77,9 +78,7 @@ export const AreaSelect: React.FC<{
           left: initial?.[0] || 0,
           top: initial?.[1] || 0,
         }}
-      >
-        <div className="dragging-area-inner" />
-      </div>
+      />
     </div>
   );
 };

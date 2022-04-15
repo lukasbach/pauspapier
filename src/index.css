@@ -15,8 +15,18 @@ code {
 html, body, #root {
   height: 100%;
   margin: 0;
+  padding: 0;
+  background-color: transparent;
+  overflow: hidden;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
 
 :root {
-  --primary: #0fd;
+  --primary: #44D62C;
+  --dark: #1f1f1f;
+  --dark-hover: #2d2d2d;
+  --dark-active: #2d2d2d;
 }
