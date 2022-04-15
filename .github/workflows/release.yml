@@ -13,6 +13,7 @@ jobs:
           yarn build
           yarn lint
       # - name: Version Bump
+      #   id: versionbump
       #   uses: phips28/gh-action-bump-version@master
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -23,13 +24,13 @@ jobs:
       #     patch-wording: patch,fixes
       #     rc-wording: RELEASE,alpha
       # - name: Create Release
-      #   id: create_release
+      #   id: createrelease
       #   uses: actions/create-release@v1
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #   with:
-      #     tag_name: ${{ github.ref }}
-      #     release_name: Release ${{ github.ref }}
+      #     tag_name: ${{ steps.versionbump.newTag }}
+      #     release_name: Release ${{ steps.versionbump.newTag }}
       #     draft: false
       #     prerelease: false
 
@@ -40,6 +41,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build
         run: |
+          sudo apt-get install libgtk-3-dev
           yarn
           yarn tauri build
           ls ./src-tauri/target/release/
@@ -54,8 +56,13 @@ jobs:
         run: |
           yarn
           yarn tauri build
-          ls ./src-tauri/target/release/
-          ls ./src-tauri/target/release/build/
+    #  - name: Upload Release Assets
+    #    uses: NBTX/upload-release-assets@v1
+    #    env:
+    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #    with:
+    #      upload_url: ${{ jobs.prepare.outputs.createrelease.outputs.upload_url }}
+    #      targets: src-tauri/target
 
   build_macos:
     runs-on: macos-latest
